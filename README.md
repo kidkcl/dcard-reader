@@ -8,11 +8,15 @@ run `yarn start` to start both the client and server.
 
 ## Client
 
+Built with create-react-app
+
+```
 components
 |-- Article
-|** ArticleList
+|__ ArticleList
 hooks
-|** useFetch // handle fetch posts from backend server
+|__ useFetch // handle fetch posts from backend server
+```
 
 ## Server
 
