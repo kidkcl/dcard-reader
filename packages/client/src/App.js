@@ -1,10 +1,9 @@
-import './App.css';
-import Article from './components/Article';
+import ArticleList from './components/ArticleList';
 
 function App() {
   return (
-    <div className="App">
-      <Article />
+    <div>
+      <ArticleList />
     </div>
   );
 }

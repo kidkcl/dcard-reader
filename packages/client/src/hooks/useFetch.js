@@ -10,8 +10,7 @@ const useFetch = (lastId) => {
     try {
       await setLoading(true);
       await setError(false);
-      console.log(`/data?id=${lastId}`);
-      const res = await axios.get(`/data?id=${lastId}`);
+      const res = await axios.get(`/api/data?id=${lastId}`);
       await setList((prev) => [...prev, ...res.data]);
       setLoading(false);
     } catch (err) {
