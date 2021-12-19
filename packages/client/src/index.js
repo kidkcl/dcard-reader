@@ -9,20 +9,20 @@ import reportWebVitals from './reportWebVitals';
 
 const theme = createTheme({
   palette: {
-      primary: {
-          main: '#3F8AE0'
-      },
-      secondary: {
-          main: '#326eb3'
-      },
-      background: {
-        default: '#00324e',
-      },
+    primary: {
+      main: '#3F8AE0',
+    },
+    secondary: {
+      main: '#326eb3',
+    },
+    background: {
+      default: '#00324e',
+    },
   },
   text: {
-      main: '#172B4D',
-      light: '#262930'
-  }
+    main: '#172B4D',
+    light: '#262930',
+  },
 });
 
 ReactDOM.render(

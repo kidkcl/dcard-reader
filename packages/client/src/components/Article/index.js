@@ -1,24 +1,37 @@
 import React from 'react';
-import { 
-  ListItem, 
-  Divider, 
-  ListItemText, 
-} from '@mui/material';
+import PropTypes from 'prop-types';
+import { ListItem, Divider, ListItemText } from '@mui/material';
 
-const Article = (props) => {
-  const { article } = props;
+const Article = function (props) {
+  const { forum, id, title, excerpt } = props;
   return (
     <div>
-      <ListItem component="a" href={`https://www.dcard.tw/f/${article.forum}/p/${article.id}`} sx={{ paddingY: '20px' }}>
+      <ListItem
+        component="a"
+        href={`https://www.dcard.tw/f/${forum}/p/${id}`}
+        sx={{ paddingY: '20px' }}
+      >
         <ListItemText
-          primaryTypographyProps={{ variant: "subtitle1", color: "#000" }}
-          primary={article.title}
-          secondary={article.excerpt}
+          primaryTypographyProps={{ variant: 'subtitle1', color: '#000' }}
+          primary={title}
+          secondary={excerpt}
         />
       </ListItem>
       <Divider component="li" />
     </div>
   );
+};
+
+Article.propTypes = {
+  id: PropTypes.number.isRequired,
+  forum: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  excerpt: PropTypes.string,
+};
+
+Article.defaultProps = {
+  forum: '',
+  excerpt: '',
 };
 
 export default Article;

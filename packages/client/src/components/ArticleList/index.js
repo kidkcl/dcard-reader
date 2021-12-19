@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { List } from '@mui/material';
 import styled from 'styled-components';
 
@@ -13,19 +13,9 @@ const ListWrapper = styled(List)`
   background: #fff;
 `;
 
-const ArticleList = () => {
-  const { loading, error, list, fetchNextPage } = useFetch();
+const ArticleList = function () {
+  const { loading, error, list, fetchDcardPosts } = useFetch();
   const loader = useRef(null);
-
-  const handleObserver = useCallback(
-    (entries) => {
-      const target = entries[0];
-      if (target.isIntersecting) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage]
-  );
 
   useEffect(() => {
     const option = {
@@ -33,17 +23,31 @@ const ArticleList = () => {
       rootMargin: '20px',
       threshold: 0,
     };
+
+    const handleObserver = (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        fetchDcardPosts();
+      }
+    };
+
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) observer.observe(loader.current);
 
     return () => observer.disconnect();
-  }, [loader, handleObserver]);
+  }, [loader]);
 
   return (
     <ListWrapper>
       <List>
-        {list.map((article, key) => (
-          <Article key={key} article={article} />
+        {list.map((article) => (
+          <Article
+            key={article.id}
+            forum={article.forum}
+            id={article.id}
+            title={article.title}
+            excerpt={article.excerpt}
+          />
         ))}
       </List>
       {loading && <p>Loading...</p>}

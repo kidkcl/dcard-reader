@@ -14,11 +14,17 @@ app.get('/api/data', async (req, res) => {
   if (!id) {
     await axios.get('https://www.dcard.tw/v2/posts?popular=true')
       .then((response) => res.send(response.data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        res.status(500).json({ message: err.message });
+      });
   } else {
     await axios.get(`https://www.dcard.tw/v2/posts?before=${id}`)
       .then((response) => res.send(response.data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        res.status(500).json({ message: err.message });
+      });
   }
 });
 

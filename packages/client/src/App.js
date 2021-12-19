@@ -1,11 +1,11 @@
 import ArticleList from './components/ArticleList';
 
-function App() {
+const App = function () {
   return (
     <div>
       <ArticleList />
     </div>
   );
-}
+};
 
 export default App;
