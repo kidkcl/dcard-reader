@@ -116,7 +116,7 @@ const mockDataJson = {
 };
 
 describe('app', () => {
-  it('GETs /api/data and should obtain { foo: "bar" }', async () => {
+  it('GETs /api/data and should obtain mocked response', async () => {
     expect.assertions(1);
     axios.get.mockResolvedValue(mockDataJson);
     const res = await request(app)
