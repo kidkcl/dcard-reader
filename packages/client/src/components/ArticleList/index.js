@@ -1,15 +1,10 @@
-import React, { 
-  useState, 
-  useCallback, 
-  useEffect, 
-  useRef 
-} from "react";
-import { List } from "@mui/material";
-import styled from "styled-components";
+import React, { useCallback, useEffect, useRef } from 'react';
+import { List } from '@mui/material';
+import styled from 'styled-components';
 
-import Article from "../Article";
+import Article from '../Article';
 
-import useFetch from "../../hooks/useFetch";
+import useFetch from '../../hooks/useFetch';
 
 const ListWrapper = styled(List)`
   max-width: 728px;
@@ -19,28 +14,28 @@ const ListWrapper = styled(List)`
 `;
 
 const ArticleList = () => {
-  const [lastId, setLastId] = useState('');
-  const { loading, error, list } = useFetch(lastId);
+  const { loading, error, list, fetchNextPage } = useFetch();
   const loader = useRef(null);
 
-  const handleObserver = useCallback((entries) => {
-    const target = entries[0];
-    if (target.isIntersecting) {
-      if (list && list.length > 0 && lastId !== list[list.length-1].id) {
-        setLastId(list[list.length-1].id);
-      }      
-    }
-  }, [lastId, list]);
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        fetchNextPage();
+      }
+    },
+    [fetchNextPage]
+  );
 
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: "20px",
-      threshold: 0
+      rootMargin: '20px',
+      threshold: 0,
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) observer.observe(loader.current);
-  
+
     return () => observer.disconnect();
   }, [loader, handleObserver]);
 

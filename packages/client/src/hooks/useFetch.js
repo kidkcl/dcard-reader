@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 
-const useFetch = (lastId) => {
+const useFetch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
@@ -10,19 +10,33 @@ const useFetch = (lastId) => {
     try {
       await setLoading(true);
       await setError(false);
-      const res = await axios.get(`/api/data?id=${lastId}`);
-      await setList((prev) => [...prev, ...res.data]);
+      const { data } = await axios.get(`/api/data`);
+      await setList((prev) => [...prev, ...data]);
       setLoading(false);
     } catch (err) {
       setError(err);
     }
-  }, [lastId]);
+  }, []);
+
+  const fetchNextPage = async () => {
+    try {
+      await setLoading(true);
+      await setError(false);
+      const { data } = await axios.get(
+        `/api/data?id=${list[list.length - 1].id}`
+      );
+      await setList((prev) => [...prev, ...data]);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+    }
+  };
 
   useEffect(() => {
     fetchDcardPosts();
-  }, [fetchDcardPosts, lastId]);
+  }, [fetchDcardPosts]);
 
-  return { loading, error, list };
-}
+  return { loading, error, list, fetchNextPage };
+};
 
 export default useFetch;
