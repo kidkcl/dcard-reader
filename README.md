@@ -4,7 +4,7 @@ A simple Dcard posts reader built with Lerna, React and express.
 
 ## Getting Start
 
-run `yarn start` to start both the client and server.
+run `yarn start` to start both client and server.
 
 ## Features
 
