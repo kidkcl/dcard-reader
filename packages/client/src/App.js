@@ -1,6 +1,6 @@
 import ArticleList from './components/ArticleList';
 
-const App = function () {
+const App = function App() {
   return (
     <div>
       <ArticleList />

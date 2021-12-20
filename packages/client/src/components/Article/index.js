@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem, Divider, ListItemText } from '@mui/material';
 
-const Article = function (props) {
+const Article = function Article(props) {
   const { forum, id, title, excerpt } = props;
   return (
     <div>

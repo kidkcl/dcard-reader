@@ -13,7 +13,7 @@ const ListWrapper = styled(List)`
   background: #fff;
 `;
 
-const ArticleList = function () {
+const ArticleList = function AritcleList() {
   const { loading, error, list, fetchDcardPosts } = useFetch();
   const loader = useRef(null);
 
