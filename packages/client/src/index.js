@@ -23,6 +23,13 @@ const theme = createTheme({
     main: '#172B4D',
     light: '#262930',
   },
+  overrides: {
+    MuiListItem: {
+      root: {
+        paddingY: '20px',
+      },
+    },
+  },
 });
 
 ReactDOM.render(

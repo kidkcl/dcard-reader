@@ -5,6 +5,7 @@ import uniqBy from 'lodash/uniqBy';
 const useFetch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [empty, setEmpty] = useState(false);
   const [list, setList] = useState([]);
   const lastId = useRef('');
 
@@ -14,7 +15,11 @@ const useFetch = () => {
       await setError(false);
 
       const { data } = await axios.get(`/api/data?id=${lastId.current}`);
-      if (!data || data.length === 0) return;
+      if (!data || data.length === 0) {
+        setLoading(false);
+        setEmpty(true);
+        return;
+      }
       lastId.current = data[data.length - 1].id;
       await setList((prev) => uniqBy([...prev, ...data], 'id'));
 
@@ -28,6 +33,7 @@ const useFetch = () => {
   return {
     loading,
     error,
+    empty,
     list,
     fetchDcardPosts,
   };

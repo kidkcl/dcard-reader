@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { List } from '@mui/material';
+import { List, ListItem, ListItemText } from '@mui/material';
 import styled from 'styled-components';
 
 import Article from '../Article';
@@ -14,7 +14,7 @@ const ListWrapper = styled(List)`
 `;
 
 const ArticleList = function AritcleList() {
-  const { loading, error, list, fetchDcardPosts } = useFetch();
+  const { loading, error, empty, list, fetchDcardPosts } = useFetch();
   const loader = useRef(null);
 
   useEffect(() => {
@@ -39,18 +39,25 @@ const ArticleList = function AritcleList() {
 
   return (
     <ListWrapper>
-      <List>
-        {list.map((article) => (
-          <Article
-            key={article.id}
-            forum={article.forum}
-            id={article.id}
-            title={article.title}
-            excerpt={article.excerpt}
-          />
-        ))}
-      </List>
-      {loading && <p>Loading...</p>}
+      {list.map((article) => (
+        <Article
+          key={article.id}
+          forum={article.forum}
+          id={article.id}
+          title={article.title}
+          excerpt={article.excerpt}
+        />
+      ))}
+      {loading && (
+        <ListItem>
+          <ListItemText primary="Loading..." />
+        </ListItem>
+      )}
+      {empty && (
+        <ListItem>
+          <ListItemText primary="沒有更多新文章囉！" />
+        </ListItem>
+      )}
       {error && <p>Error!!</p>}
       <div ref={loader} />
     </ListWrapper>

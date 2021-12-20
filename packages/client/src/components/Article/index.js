@@ -6,11 +6,7 @@ const Article = function Article(props) {
   const { forum, id, title, excerpt } = props;
   return (
     <div>
-      <ListItem
-        component="a"
-        href={`https://www.dcard.tw/f/${forum}/p/${id}`}
-        sx={{ paddingY: '20px' }}
-      >
+      <ListItem component="a" href={`https://www.dcard.tw/f/${forum}/p/${id}`}>
         <ListItemText
           primaryTypographyProps={{ variant: 'subtitle1', color: '#000' }}
           primary={title}
