@@ -10,6 +10,7 @@ run `yarn start` to start both the client and server.
 
 - A monorepo built with lerna to run React client and express server.
 - Styling with Material UI v5 and Styled Components.
+- Infinite scroll implemented by Intersection Observer API
 
 ## Client
 
@@ -26,3 +27,10 @@ hooks
 ## Server
 
 An express server to get data from Dcard API and handle cors.
+
+- `/api/data?id={postId}`: call the Dcard API. `id` is Dcard post id, which is optional.
+
+## Todos
+
+- Empty state
+- Skeleton components
